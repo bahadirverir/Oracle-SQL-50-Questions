@@ -35,4 +35,4 @@ Projede kullanılan veritabanı, Oracle’ın örnek veri kümesi olan **HR (Hum
 
 ### **3️⃣ Projeyi Klonlayın**
 ```bash
-git clone https://github.com/kullaniciadi/sql-hr-uygulamalari.git
+git clone https://github.com/bahadirverir/Oracle-SQL-50-Soruda.git
