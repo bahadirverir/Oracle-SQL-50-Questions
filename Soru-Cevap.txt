@@ -1,0 +1,377 @@
+﻿/1-) Maaşı 4000 ile 5000 arasında olan çalışanları listeleyen sql kodu/
+SELECT * FROM EMPLOYEES 
+WHERE SALARY>=4000 AND SALARY<=5000;
+
+/2-)job id IT_PROG olan çalışanların ad soyad maaş bilgisini yazdıran sql kodu/
+SELECT FIRST_NAME, LAST_NAME, SALARY FROM EMPLOYEES
+WHERE JOB_ID = 'IT_PROG';
+
+/3-)manager id'si 114 olan personelin adını, soyadını ve maaşını listeleyen SQL kodu/
+SELECT FIRST_NAME, LAST_NAME, SALARY FROM EMPLOYEES
+WHERE MANAGER_ID = 114;
+
+/4-)Hire date'ı 2006'dan büyük olan personelin adını, soyadını, maaşını ve işe giriş tarihini listeleyen SQL kodu/
+SELECT FIRST_NAME, LAST_NAME, SALARY, HIRE_DATE FROM EMPLOYEES
+WHERE to_char(HIRE_DATE,'yyyy')>2006
+
+/5-)Departman ID'si 80 ve 100 olan personellerin ad, soyad, departman ID ve maaşını yazan SQL kodu/
+SELECT FIRST_NAME, LAST_NAME, DEPARTMENT_ID, SALARY FROM EMPLOYEES
+WHERE DEPARTMENT_ID = 80 OR DEPARTMENT_ID = 100;
+
+/6-)Herhangi bir müdüre bağlı olmadan çalışan personelin adını, soyadını, maaşını ve departman ID'sini yazan SQL kodu/
+SELECT FIRST_NAME, LAST_NAME, SALARY, DEPARTMENT_ID FROM EMPLOYEES
+WHERE MANAGER_ID IS NULL;
+
+/7-)Adının ikinci harfi d olan,soyadı 5 karakterli olan personelin ad soyad maaş ve departman ID'sini yazan SQL kodu/
+SELECT FIRST_NAME, LAST_NAME, SALARY, DEPARTMENT_ID FROM EMPLOYEES
+WHERE FIRST_NAME LIKE ‘_d%’ AND LAST_NAME LIKE ‘_____’;
+
+/8-)Departman ID'si 15'ten büyük olan personellerin ad soyad tek sütunda yazıp, departmanID ve maaşını listeleyen SQL kodu/
+SELECT FIRST_NAME ||' '|| LAST_NAME AS AD_SOYAD ,DEPARTMENT_ID, SALARY FROM EMPLOYEES
+WHERE DEPARTMENT_ID > 15;
+
+/9-)5 yıldan fazla çalışan personele 1000 birim zam yaparak eski ve yeni maaşı listeleyen SQL kodu/
+SELECT FIRST_NAME, LAST_NAME, SALARY AS OLD_SALARY, SALARY+1000 AS NEW_SALARY FROM EMPLOYEES
+WHERE to_char(sysdate,'yyyy')-to_char(HIRE_DATE,'yyyy')>5;
+
+/10-)tüm personellerin maaşına göre büyükten küçüğe doğru sıralayan ve ad,soyad,maaş,işe giriş tarihini listeleyen sql kodu/
+SELECT FIRST_NAME, LAST_NAME, SALARY, HIRE_DATE FROM EMPLOYEES
+ORDER BY SALARY DESC;
+
+/11-)her personelin adını, soyadını, maaşını ve çalıştığı departmanı listeleyen SQL kodu/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME FROM EMPLOYEES E,DEPARTMENTS D
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID;
+
+/12-)her departmanın adını ve o departmanın müdürünün adını ve maaşını yazan SQL kodu/
+SELECT D.DEPARTMENT_NAME, E.FIRST_NAME, E.LAST_NAME, E.SALARY FROM EMPLOYEES E, DEPARTMENTS D
+WHERE D.MANAGER_ID = E.EMPLOYEE_ID;
+
+/13-)Her personelin adını, soyadını, maaşını ve görevini listeleyen SQL kodu/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, J.JOB_TITLE FROM EMPLOYEES E, JOBS J
+WHERE E.JOB_ID = J.JOB_ID;
+
+/14-)Sales departmanında çalışan personelin adını, soyadını ve maaşını listeleyen SQL kodu/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME FROM EMPLOYEES E, DEPARTMENTS D
+WHERE D.DEPARTMENT_NAME = 'Sales'
+AND E.DEPARTMENT_ID = D.DEPARTMENT_ID;
+
+/15-)shipping departmanında en az 3 yıldır çalışanların ad soyad maaş ve işe giriş tarihini listeleyen SQL kodu/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME FROM EMPLOYEES E, DEPARTMENTS D
+WHERE to_char(sysdate,'yyyy')-to_char(HIRE_DATE,'yyyy')>3
+AND E.DEPARTMENT_ID = D.DEPARTMENT_ID
+AND D.DEPARTMENT_NAME = 'Shipping';
+
+/16-) Ülke adı USA olan şehirlerin hangileri olduğunu listeleyen SQL kodu*/
+SELECT C.COUNTRY_NAME, L.CITY FROM COUNTRIES C, LOCATIONS L
+WHERE C.COUNTRY_ID = L.COUNTRY_ID 
+AND C.COUNTRY_NAME = 'United States of America';
+
+/17-)Programmer olarak çalışan personellerin ad, soyad, maaş ve hangi bölümde çalıştığını listeleyen SQL kodu/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, J.JOB_TITLE FROM EMPLOYEES E, JOBS J
+WHERE J.JOB_TITLE = 'Programmer'
+AND E.JOB_ID = J.JOB_ID;
+
+/17.Sorunun JOİN ifadesi ile çözümü/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, J.JOB_TITLE 
+FROM EMPLOYEES E JOIN JOBS J
+ON E.JOB_ID = J.JOB_ID
+AND J.JOB_TITLE = 'Programmer';
+
+/18-)Her personelin ad soyad maaş ve çalıştığı departman müdürünün adını yazan sql kodu/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, EP.FIRST_NAME AS MÜDÜR_ADI, EP.LAST_NAME AS MÜDÜR_SOYAD
+FROM EMPLOYEES E, EMPLOYEES EP
+WHERE E.MANAGER_ID = EP.MANAGER_ID;
+
+/18.Sorunun JOİN ifadesi ile çözümü/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, EP.FIRST_NAME AS MÜDÜR_ADI, EP.LAST_NAME AS MÜDÜR_SOYAD 
+FROM EMPLOYEES E JOIN EMPLOYEES EP
+ON E.MANAGER_ID = EP.MANAGER_ID;
+
+/19-)Marketing departmanında 15 yıldır çalışanların ad soyad maaş işe giriş tarihini yazan sql kodu/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME
+FROM EMPLOYEES E, DEPARTMENTS D
+WHERE to_char(sysdate,'yyyy')-to_char(E.HIRE_DATE,'yyyy')>15
+AND E.DEPARTMENT_ID = D.DEPARTMENT_ID
+AND D.DEPARTMENT_NAME = 'Marketing';
+
+/19.Sorunun JOİN ifadesi ile çözümü/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME
+FROM EMPLOYEES E JOIN DEPARTMENTS D
+ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+AND to_char(sysdate,'yyyy')-to_char(E.HIRE_DATE,'yyyy')>15
+AND D.DEPARTMENT_NAME = 'Marketing';
+
+/20-)Finance departmanında çalışanların ad, soyad, maaş ve işe giriş tarihini listeleyen SQL kodu/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME
+FROM EMPLOYEES E, DEPARTMENTS D
+WHERE D.DEPARTMENT_NAME = 'Finance'
+AND E.DEPARTMENT_ID = D.DEPARTMENT_ID;
+
+/20.Sorunun JOİN ifadesi ile çözümü/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME
+FROM EMPLOYEES E JOIN DEPARTMENTS D
+ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+AND D.DEPARTMENT_NAME = 'Finance';
+
+/21-)Finance manager olarak çalışan personelin ad soyad maaş işe giriş tarihi ve departman adını listeleyen sql kodu/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME, J.JOB_TITLE
+FROM EMPLOYEES E, DEPARTMENTS D, JOBS J
+WHERE J.JOB_TITLE = 'Finance Manager'
+AND E.JOB_ID = J.JOB_ID 
+AND E.DEPARTMENT_ID = D.DEPARTMENT_ID;
+
+/21.Sorunun JOİN ifadesi ile çözümü/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME, J.JOB_TITLE
+FROM EMPLOYEES E JOIN DEPARTMENTS D 
+ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+JOIN JOBS J ON E.JOB_ID = J.JOB_ID
+AND J.JOB_TITLE = 'Finance Manager';
+
+/22-): Commission_pct olmayan programer olarak çalışan personelin adını soy adını maaşını çalıştığı şehri ve commission pct sini listeleyen SQL kodunu yazınız
+Select E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.COMMISSION_PCT, L.CITY, J.JOB_TITLE
+FROM EMPLOYEES E,DEPARTMENTS D,LOCATIONS L, JOBS J
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID
+AND D.LOCATION_ID = L.LOCATION_ID
+AND E.JOB_ID = J.JOB_ID
+AND E.COMMISSION_PCT IS NULL 
+AND J.JOB_TITLE='Programmer'
+
+/22.Sorunun JOİN ifadesi ile çözümü/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.COMMISSION_PCT, L.CITY, J.JOB_TITLE
+FROM EMPLOYEES E
+JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+JOIN LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID
+JOIN JOBS J ON E.JOB_ID = J.JOB_ID
+AND E.COMMISSION_PCT IS NULL
+AND J.JOB_TITLE = 'PROGRAMMER';
+
+23-): Manager_id leri NULL olan departmanların id lerini ve isimlerini listeleyen SQL kodunu yazınız..
+SELECT D.MANAGER_ID, D.DEPARTMENT_NAME, D.DEPARTMENT_ID    
+FROM DEPARTMENTS D    
+WHERE D.MANAGER_ID IS NULL;
+
+24 Adları aynı soy adları farklı olan personelin adını ve soy adını aynı sütunda listeleyen SQL kodunu yazınız..
+SELECT E.FIRST_NAME|| ' ' ||E.LAST_NAME|| ' ' ||B.FIRST_NAME|| ' ' ||B.LAST_NAME as AYNI_İSİM_FARKLI_SOYAD
+FROM EMPLOYEES E, EMPLOYEES B    
+WHERE E.FIRST_NAME = B.FIRST_NAME    
+AND E.LAST_NAME <> B.LAST_NAME;
+
+25-): Her Meslek gurubunda kaç kişi çalıştığını listeleyen SQL kodunu yazınız...
+SELECT E.JOB_ID, COUNT(E.EMPLOYEE_ID) /* --> COUNT() yandakinin aynısı */    
+FROM EMPLOYEES E    
+GROUP BY E.JOB_ID;
+
+26-): Her mesleğin adını ve kaç kişi çalıştığını listeleyen SQL kodunu yazınız...
+SELECT J.JOB_TITLE, COUNT(E.EMPLOYEE_ID) /* --> COUNT() yandakinin aynısı */    
+FROM EMPLOYEES E    
+JOIN JOBS J ON E.JOB_ID = J.JOB_ID    
+GROUP BY J.JOB_TITLE;
+
+27-): Her departmanın adını ve departmanda kaç personel çalıştığını sorgulayan SQL kodunu yazınız
+SELECT D.DEPARTMENT_NAME, COUNT(E.EMPLOYEE_ID)    
+FROM DEPARTMENTS D, EMPLOYEES E    
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID    
+GROUP BY D.DEPARTMENT_NAME;
+
+28-): Her şehrin adını ve o şehirde kaç departman olduunu listeleyen SQL kodunu yazınız 
+SELECT L.CITY, COUNT(D.DEPARTMENT_ID) AS DEPARTMAN_SAYISI    
+FROM DEPARTMENTS D, LOCATIONS L    
+WHERE D.LOCATION_ID = L.LOCATION_ID    
+GROUP BY L.CITY;
+
+29-): Her ülkenin adını ve ülkedeki    şehir sayısını listeleyen SQL kodunu yazınız...
+SELECT C.COUNTRY_NAME, COUNT(L.CITY) AS SEHIR_SAYISI    
+FROM COUNTRIES C, LOCATIONS L    
+WHERE C.COUNTRY_ID = L.COUNTRY_ID    
+GROUP BY C.COUNTRY_NAME;
+
+30: En düşük maaşı alan işçinin adını soyadını,maaşını ve departman adını listeleyen sql kodunu yazınız...
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME
+FROM EMPLOYEES E JOIN DEPARTMENTS D 
+ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+WHERE E.SALARY = (SELECT MIN(SALARY) FROM EMPLOYEES);
+
+/30.Sorunun JOİN ifadesi ile çözümü/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME
+FROM EMPLOYEES E, DEPARTMENTS D 
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID
+AND E.SALARY = (SELECT MIN(SALARY) FROM EMPLOYEES);
+
+/31-)her bir departmanda endüşük maaşı alan çalıanın ad soyad maaş departman adı liseleme/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME    
+FROM EMPLOYEES E, DEPARTMENTS D    
+WHERE (D.DEPARTMENT_ID, E.SALARY) = ANY (    
+        SELECT E.DEPARTMENT_ID, MIN(SALARY)    
+        FROM EMPLOYEES E    
+        GROUP BY E.DEPARTMENT_ID    
+);
+
+/32-)her departmanda maaşı 3000 ile 5000 arasında olan kaç çalışan olduğunu bulan sql kodu/
+SELECT D.DEPARTMENT_NAME, COUNT(E.EMPLOYEE_ID)    
+FROM DEPARTMENTS D, EMPLOYEES E    
+WHERE D.DEPARTMENT_ID = E.DEPARTMENT_ID    
+AND E.SALARY BETWEEN 3000 AND 5000    
+GROUP BY D.DEPARTMENT_NAME;
+
+/33-)en az 10 çalışana sahip meslek gruplarını listeleen sql kodu/
+SELECT J.JOB_TITLE, COUNT(E.EMPLOYEE_ID)    
+FROM EMPLOYEES E, JOBS J    
+WHERE E.JOB_ID = J.JOB_ID    
+GROUP BY J.JOB_TITLE    
+HAVING COUNT(J.JOB_ID) >= 10;
+
+/34-)her departmanın ortalama maaşını listeleyen sql kodu/
+SELECT D.DEPARTMENT_NAME, ROUND(AVG(E.SALARY), 3) AS ORT_MAAS    
+FROM EMPLOYEES E, DEPARTMENTS D    
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID    
+GROUP BY D.DEPARTMENT_NAME;
+
+/35-) 30 nolu departmanda ortalama maaştan az para alan çalışanları listele/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY    
+FROM EMPLOYEES E, DEPARTMENTS D    
+WHERE D.DEPARTMENT_ID = E.DEPARTMENT_ID    
+AND E.DEPARTMENT_ID = 30    
+AND E.SALARY <= (SELECT AVG(E.SALARY) FROM EMPLOYEES E);
+
+/36-)şirkette ilk işe başlayan kişinin adını soyadını hire date yazan sql kodu/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.HIRE_DATE    
+FROM EMPLOYEES E    
+WHERE E.HIRE_DATE = (SELECT MIN(E.HIRE_DATE) FROM EMPLOYEES E);
+
+/37-)ortalama maaştan daha yüksek maaş alan personellerin ad soyad maaş listeleme/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY    
+FROM EMPLOYEES E    
+GROUP BY E.FIRST_NAME, E.LAST_NAME, E.SALARY    
+HAVING E.SALARY > (SELECT AVG(SALARY) FROM EMPLOYEES);
+
+/38-)en yüksek maaşa sahip personelin ad soyad maaş ve ünvanını sorgulama/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, J.JOB_TITLE    
+FROM EMPLOYEES E, JOBS J    
+WHERE E.JOB_ID = J.JOB_ID    
+AND E.SALARY = (SELECT MAX(SALARY) FROM EMPLOYEES);
+
+/39-)en çok çalışanı olan ünvanı bulan sorgu/
+SELECT J.JOB_TITLE, COUNT(E.EMPLOYEE_ID)    
+FROM JOBS J, EMPLOYEES E    
+WHERE E.JOB_ID = J.JOB_ID    
+GROUP BY E.JOB_ID, J.JOB_TITLE    
+HAVING COUNT(E.EMPLOYEE_ID) = (    
+        SELECT MAX(COUNT(*))    
+        FROM EMPLOYEES E    
+        GROUP BY E.JOB_ID
+);
+
+/40-)job title clerk olan personellerin içinde en yeni işe giren personelin ad soyad işe giriş tarihi sorgu/
+SELECT E.FIRST_NAME, E.LAST_NAME, E.HIRE_DATE, J.JOB_TITLE    
+FROM EMPLOYEES E, JOBS J    
+WHERE E.JOB_ID = J.JOB_ID    
+AND E.HIRE_DATE = (    
+        SELECT MAX(E.HIRE_DATE)    
+        FROM EMPLOYEES E    
+        WHERE E.JOB_ID = ANY (    
+                SELECT J.JOB_ID    
+                FROM JOBS J    
+                WHERE J.JOB_TITLE LIKE '%Clerk%’    
+        )
+);
+
+/41-)personel isimlerinin isilerinin en çok hangi harfle başladığını bulan sorgu/
+SELECT SUBSTR(E.FIRST_NAME, 1, 1)    as ENÇOK_GEÇEN_HARF
+FROM EMPLOYEES E    
+GROUP BY SUBSTR(E.FIRST_NAME, 1, 1)    
+HAVING COUNT(*) = (    
+        SELECT MAX(COUNT(*))    
+        FROM EMPLOYEES E    
+        GROUP BY SUBSTR(E.FIRST_NAME, 1, 1)
+);
+                                        
+/42-)en az şehre sahip olan ülkeyi sorgulayan kod/
+SELECT C.COUNTRY_NAME, COUNT(C.COUNTRY_NAME)    
+FROM COUNTRIES C, LOCATIONS L    
+WHERE C.COUNTRY_ID = L.COUNTRY_ID    
+GROUP BY C.COUNTRY_NAME    
+HAVING COUNT(C.COUNTRY_NAME) = (    
+        SELECT MIN(COUNT(*))    
+        FROM LOCATIONS L    
+        GROUP BY L.CITY
+);
+
+/43-)Employees tablosundaki tum çalışanlara ait en yüksek en düsük maaşları toplamı ve aritmetik ortalamasını veren sql kodu/
+SELECT MAX(SALARY) AS "EN ÇOK",    
+              MIN(SALARY) AS "EN AZ",    
+              SUM(SALARY) AS "TOPLAM",    
+              (MAX(SALARY) + MIN(SALARY)) / 2 AS "MAX-MIN-AVG",    
+              ROUND(AVG(SALARY), 1) AS "ORTALAMA"    
+FROM EMPLOYEES;
+        
+/44-)Job_id lerine göre en düşük maaşı bulup bu maaşların ortalamasını alan sql kodu/
+SELECT ROUND(AVG(MIN(SALARY)), 2) AS "MIN_MAASLARIN_ORTALAMASI"    
+FROM EMPLOYEES    
+GROUP BY JOB_ID;
+
+/45-)Departmanlara göre en yüksek maaşların ve ortalamaların listelendiği sql kodu/
+SELECT E.DEPARTMENT_ID, D.DEPARTMENT_NAME,    
+              ROUND(MAX(SALARY), 2) AS EN_YUKSEK_MAAS,    
+              ROUND(AVG(SALARY), 2) AS ORTALAMA_MAAS    
+FROM EMPLOYEES E, DEPARTMENTS D    
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID    
+GROUP BY E.DEPARTMENT_ID, D.DEPARTMENT_NAME;
+
+/*46-)Yonetici olan tum departmanların kendı içinde gruplandırılarak bu bölümlerden maksimum
+maaş ile minimum maaş farkının 5000den büyük olanların manager id si ile o bölümdekı 
+minimum maaşı, maaşa göre azalan sırada sıralayan sql kodu*/
+SELECT MANAGER_ID, MIN(SALARY)    
+FROM EMPLOYEES E    
+WHERE MANAGER_ID IS NOT NULL    
+GROUP BY MANAGER_ID    
+HAVING MAX(SALARY) - MIN(SALARY) > 5000    
+ORDER BY MIN(SALARY) DESC;
+    
+/*47-)job ıdlerı mk_man mk rep ve add ast işlerinde çalışmayan çalışanları job ıdlerıne gore
+gruplandırarak bu işlere ait ortalama maaşları, ortalama maaşların 10.000 den yuksek
+olanlarını gösteren ve sonuçları maaşa gore artan sıra ile sıralayan sql kodu*/
+SELECT JOB_ID, AVG(SALARY) AS AVERAGE_SALARY
+FROM EMPLOYEES E
+WHERE JOB_ID NOT IN ('MK_MAN', 'MK_REP', 'ADD_AST')
+GROUP BY JOB_ID
+HAVING AVG(SALARY) > 10000
+ORDER BY AVG(SALARY) DESC;
+
+/48-)Employees tablosundaki tekrarlamayan bölümlerin sayısını bulan sql kodu/
+SELECT COUNT(DISTINCT DEPARTMENT_ID) AS TEKRARLANMAYAN    
+FROM EMPLOYEES;
+
+/49-)En az bir çalışanı olup, bu çalışanların maaş ortalaması genel maaş ortalamasının üzerinde olan departmanların adlarını listeleyin
+SELECT D.DEPARTMENT_NAME
+FROM DEPARTMENTS D
+WHERE D.DEPARTMENT_ID IN (
+    SELECT E.DEPARTMENT_ID
+    FROM EMPLOYEES E
+    GROUP BY E.DEPARTMENT_ID
+    HAVING AVG(E.SALARY) > (SELECT AVG(SALARY) FROM EMPLOYEES)
+);
+SELECT D.DEPARTMENT_NAME
+FROM DEPARTMENTS D
+JOIN EMPLOYEES E ON D.DEPARTMENT_ID = E.DEPARTMENT_ID
+GROUP BY D.DEPARTMENT_NAME
+HAVING AVG(E.SALARY) > (SELECT AVG(SALARY) FROM EMPLOYEES);
+
+/50-)Her bir iş unvanı (JOB_TITLE) için, o iş unvanındaki çalışan sayısı, toplam maaş ve ortalama maaşı listeleyin. Ancak sadece 3'ten fazla çalışanı olan iş unvanlarını dahil edin.
+SELECT J.JOB_TITLE, 
+              COUNT(*) AS CALISAN_SAYISI, 
+              SUM(E.SALARY) AS TOPLAM_MAAS, 
+              ROUND(AVG(E.SALARY), 2) AS ORTALAMA_MAAS
+FROM EMPLOYEES E, JOBS J
+WHERE E.JOB_ID = J.JOB_ID
+GROUP BY J.JOB_TITLE
+HAVING COUNT(*) > 3;
+
+SELECT J.JOB_TITLE, 
+              COUNT(E.EMPLOYEE_ID) AS CALISAN_SAYISI, 
+              SUM(E.SALARY) AS TOPLAM_MAAS, 
+              ROUND(AVG(E.SALARY), 2) AS ORTALAMA_MAAS
+FROM EMPLOYEES E
+JOIN JOBS J ON E.JOB_ID = J.JOB_ID
+GROUP BY J.JOB_TITLE
+HAVING COUNT(E.EMPLOYEE_ID) > 3;
+
