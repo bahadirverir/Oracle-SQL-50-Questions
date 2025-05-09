@@ -1,0 +1,391 @@
+{\rtf1\ansi\ansicpg1254\cocoartf2821
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Bold;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww34360\viewh20460\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs48 \cf0 /1-) Maa\uc0\u351 \u305  4000 ile 5000 aras\u305 nda olan \'e7al\u305 \u351 anlar\u305  listeleyen sql kodu/\
+SELECT * FROM EMPLOYEES \
+WHERE SALARY>=4000 AND SALARY<=5000;\
+\
+/2-)job id IT_PROG olan \'e7al\uc0\u305 \u351 anlar\u305 n ad soyad maa\u351  bilgisini yazd\u305 ran sql kodu/\
+SELECT FIRST_NAME, LAST_NAME, SALARY FROM EMPLOYEES\
+WHERE JOB_ID = 'IT_PROG';\
+\
+/3-)manager id'si 114 olan personelin ad\uc0\u305 n\u305 , soyad\u305 n\u305  ve maa\u351 \u305 n\u305  listeleyen SQL kodu/\
+SELECT FIRST_NAME, LAST_NAME, SALARY FROM EMPLOYEES\
+WHERE MANAGER_ID = 114;\
+\
+/4-)Hire date'\uc0\u305  2006'dan b\'fcy\'fck olan personelin ad\u305 n\u305 , soyad\u305 n\u305 , maa\u351 \u305 n\u305  ve i\u351 e giri\u351  tarihini listeleyen SQL kodu/\
+SELECT FIRST_NAME, LAST_NAME, SALARY, HIRE_DATE FROM EMPLOYEES\
+WHERE to_char(HIRE_DATE,'yyyy')>2006\
+\
+/5-)Departman ID'si 80 ve 100 olan personellerin ad, soyad, departman ID ve maa\uc0\u351 \u305 n\u305  yazan SQL kodu/\
+SELECT FIRST_NAME, LAST_NAME, DEPARTMENT_ID, SALARY FROM EMPLOYEES\
+WHERE DEPARTMENT_ID = 80 OR DEPARTMENT_ID = 100;\
+\
+/6-)Herhangi bir m\'fcd\'fcre ba\uc0\u287 l\u305  olmadan \'e7al\u305 \u351 an personelin ad\u305 n\u305 , soyad\u305 n\u305 , maa\u351 \u305 n\u305  ve departman ID'sini yazan SQL kodu/\
+SELECT FIRST_NAME, LAST_NAME, SALARY, DEPARTMENT_ID FROM EMPLOYEES\
+WHERE MANAGER_ID IS NULL;\
+\
+/7-)Ad\uc0\u305 n\u305 n ikinci harfi d olan,soyad\u305  5 karakterli olan personelin ad soyad maa\u351  ve departman ID'sini yazan SQL kodu/\
+SELECT FIRST_NAME, LAST_NAME, SALARY, DEPARTMENT_ID FROM EMPLOYEES\
+WHERE FIRST_NAME LIKE \'91_d%\'92 AND LAST_NAME LIKE \'91_____\'92;\
+\
+/8-)Departman ID'si 15'ten b\'fcy\'fck olan personellerin ad soyad tek s\'fctunda yaz\uc0\u305 p, departmanID ve maa\u351 \u305 n\u305  listeleyen SQL kodu/\
+SELECT FIRST_NAME ||' '|| LAST_NAME AS AD_SOYAD ,DEPARTMENT_ID, SALARY FROM EMPLOYEES\
+WHERE DEPARTMENT_ID > 15;\
+\
+/9-)5 y\uc0\u305 ldan fazla \'e7al\u305 \u351 an personele 1000 birim zam yaparak eski ve yeni maa\u351 \u305  listeleyen SQL kodu/\
+SELECT FIRST_NAME, LAST_NAME, SALARY AS OLD_SALARY, SALARY+1000 AS NEW_SALARY FROM EMPLOYEES\
+WHERE to_char(sysdate,'yyyy')-to_char(HIRE_DATE,'yyyy')>5;\
+\
+/10-)t\'fcm personellerin maa\uc0\u351 \u305 na g\'f6re b\'fcy\'fckten k\'fc\'e7\'fc\u287 e do\u287 ru s\u305 ralayan ve ad,soyad,maa\u351 ,i\u351 e giri\u351  tarihini listeleyen sql kodu/\
+SELECT FIRST_NAME, LAST_NAME, SALARY, HIRE_DATE FROM EMPLOYEES\
+ORDER BY SALARY DESC;\
+\
+/11-)her personelin ad\uc0\u305 n\u305 , soyad\u305 n\u305 , maa\u351 \u305 n\u305  ve \'e7al\u305 \u351 t\u305 \u287 \u305  departman\u305  listeleyen SQL kodu/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME FROM EMPLOYEES E,DEPARTMENTS D\
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID;\
+\
+/12-)her departman\uc0\u305 n ad\u305 n\u305  ve o departman\u305 n m\'fcd\'fcr\'fcn\'fcn ad\u305 n\u305  ve maa\u351 \u305 n\u305  yazan SQL kodu/\
+SELECT D.DEPARTMENT_NAME, E.FIRST_NAME, E.LAST_NAME, E.SALARY FROM EMPLOYEES E, DEPARTMENTS D\
+WHERE D.MANAGER_ID = E.EMPLOYEE_ID;\
+\
+/13-)Her personelin ad\uc0\u305 n\u305 , soyad\u305 n\u305 , maa\u351 \u305 n\u305  ve g\'f6revini listeleyen SQL kodu/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, J.JOB_TITLE FROM EMPLOYEES E, JOBS J\
+WHERE E.JOB_ID = J.JOB_ID;\
+\
+/14-)Sales departman\uc0\u305 nda \'e7al\u305 \u351 an personelin ad\u305 n\u305 , soyad\u305 n\u305  ve maa\u351 \u305 n\u305  listeleyen SQL kodu/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME FROM EMPLOYEES E, DEPARTMENTS D\
+WHERE D.DEPARTMENT_NAME = 'Sales'\
+AND E.DEPARTMENT_ID = D.DEPARTMENT_ID;\
+\
+/15-)shipping departman\uc0\u305 nda en az 3 y\u305 ld\u305 r \'e7al\u305 \u351 anlar\u305 n ad soyad maa\u351  ve i\u351 e giri\u351  tarihini listeleyen SQL kodu/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME FROM EMPLOYEES E, DEPARTMENTS D\
+WHERE to_char(sysdate,'yyyy')-to_char(HIRE_DATE,'yyyy')>3\
+AND E.DEPARTMENT_ID = D.DEPARTMENT_ID\
+AND D.DEPARTMENT_NAME = 'Shipping';\
+\
+/16-) \'dclke ad\uc0\u305  USA olan \u351 ehirlerin hangileri oldu\u287 unu listeleyen SQL kodu*/\
+SELECT C.COUNTRY_NAME, L.CITY FROM COUNTRIES C, LOCATIONS L\
+WHERE C.COUNTRY_ID = L.COUNTRY_ID \
+AND C.COUNTRY_NAME = 'United States of America';\
+\
+/17-)Programmer olarak \'e7al\uc0\u305 \u351 an personellerin ad, soyad, maa\u351  ve hangi b\'f6l\'fcmde \'e7al\u305 \u351 t\u305 \u287 \u305 n\u305  listeleyen SQL kodu/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, J.JOB_TITLE FROM EMPLOYEES E, JOBS J\
+WHERE J.JOB_TITLE = 'Programmer'\
+AND E.JOB_ID = J.JOB_ID;\
+\
+/17.Sorunun JO\uc0\u304 N ifadesi ile \'e7\'f6z\'fcm\'fc/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, J.JOB_TITLE \
+FROM EMPLOYEES E JOIN JOBS J\
+ON E.JOB_ID = J.JOB_ID\
+AND J.JOB_TITLE = 'Programmer';\
+\
+/18-)Her personelin ad soyad maa\uc0\u351  ve \'e7al\u305 \u351 t\u305 \u287 \u305  departman m\'fcd\'fcr\'fcn\'fcn ad\u305 n\u305  yazan sql kodu/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, EP.FIRST_NAME AS M\'dcD\'dcR_ADI, EP.LAST_NAME AS M\'dcD\'dcR_SOYAD\
+FROM EMPLOYEES E, EMPLOYEES EP\
+WHERE E.MANAGER_ID = EP.MANAGER_ID;\
+\
+/18.Sorunun JO\uc0\u304 N ifadesi ile \'e7\'f6z\'fcm\'fc/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, EP.FIRST_NAME AS M\'dcD\'dcR_ADI, EP.LAST_NAME AS M\'dcD\'dcR_SOYAD \
+FROM EMPLOYEES E JOIN EMPLOYEES EP\
+ON E.MANAGER_ID = EP.MANAGER_ID;\
+\
+/19-)Marketing departman\uc0\u305 nda 15 y\u305 ld\u305 r \'e7al\u305 \u351 anlar\u305 n ad soyad maa\u351  i\u351 e giri\u351  tarihini yazan sql kodu/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME\
+FROM EMPLOYEES E, DEPARTMENTS D\
+WHERE to_char(sysdate,'yyyy')-to_char(E.HIRE_DATE,'yyyy')>15\
+AND E.DEPARTMENT_ID = D.DEPARTMENT_ID\
+AND D.DEPARTMENT_NAME = 'Marketing';\
+\
+/19.Sorunun JO\uc0\u304 N ifadesi ile \'e7\'f6z\'fcm\'fc/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME\
+FROM EMPLOYEES E JOIN DEPARTMENTS D\
+ON E.DEPARTMENT_ID = D.DEPARTMENT_ID\
+AND to_char(sysdate,'yyyy')-to_char(E.HIRE_DATE,'yyyy')>15\
+AND D.DEPARTMENT_NAME = 'Marketing';\
+\
+/20-)Finance departman\uc0\u305 nda \'e7al\u305 \u351 anlar\u305 n ad, soyad, maa\u351  ve i\u351 e giri\u351  tarihini listeleyen SQL kodu/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME\
+FROM EMPLOYEES E, DEPARTMENTS D\
+WHERE D.DEPARTMENT_NAME = 'Finance'\
+AND E.DEPARTMENT_ID = D.DEPARTMENT_ID;\
+\
+/20.Sorunun JO\uc0\u304 N ifadesi ile \'e7\'f6z\'fcm\'fc/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME\
+FROM EMPLOYEES E JOIN DEPARTMENTS D\
+ON E.DEPARTMENT_ID = D.DEPARTMENT_ID\
+AND D.DEPARTMENT_NAME = 'Finance';\
+\
+/21-)Finance manager olarak \'e7al\uc0\u305 \u351 an personelin ad soyad maa\u351  i\u351 e giri\u351  tarihi ve departman ad\u305 n\u305  listeleyen sql kodu/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME, J.JOB_TITLE\
+FROM EMPLOYEES E, DEPARTMENTS D, JOBS J\
+WHERE J.JOB_TITLE = 'Finance Manager'\
+AND E.JOB_ID = J.JOB_ID \
+AND E.DEPARTMENT_ID = D.DEPARTMENT_ID;\
+\
+/21.Sorunun JO\uc0\u304 N ifadesi ile \'e7\'f6z\'fcm\'fc/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME, J.JOB_TITLE\
+FROM EMPLOYEES E JOIN DEPARTMENTS D \
+ON E.DEPARTMENT_ID = D.DEPARTMENT_ID\
+JOIN JOBS J ON E.JOB_ID = J.JOB_ID\
+AND J.JOB_TITLE = 'Finance Manager';\
+\
+/22-): Commission_pct olmayan programer olarak \'e7al\uc0\u305 \u351 an personelin ad\u305 n\u305  soy ad\u305 n\u305  maa\u351 \u305 n\u305  \'e7al\u305 \u351 t\u305 \u287 \u305  \u351 ehri ve commission pct sini listeleyen SQL kodunu yaz\u305 n\u305 z\
+Select E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.COMMISSION_PCT, L.CITY, J.JOB_TITLE\
+FROM EMPLOYEES E,DEPARTMENTS D,LOCATIONS L, JOBS J\
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID\
+AND D.LOCATION_ID = L.LOCATION_ID\
+AND E.JOB_ID = J.JOB_ID\
+AND E.COMMISSION_PCT IS NULL \
+AND J.JOB_TITLE='Programmer'\
+\
+/22.Sorunun JO\uc0\u304 N ifadesi ile \'e7\'f6z\'fcm\'fc/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.COMMISSION_PCT, L.CITY, J.JOB_TITLE\
+FROM EMPLOYEES E\
+JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID\
+JOIN LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID\
+JOIN JOBS J ON E.JOB_ID = J.JOB_ID\
+AND E.COMMISSION_PCT IS NULL\
+AND J.JOB_TITLE = 'PROGRAMMER';\
+\
+23-): Manager_id leri NULL olan departmanlar\uc0\u305 n id lerini ve isimlerini listeleyen SQL kodunu yaz\u305 n\u305 z..\
+SELECT D.MANAGER_ID, D.DEPARTMENT_NAME, D.DEPARTMENT_ID  \
+FROM DEPARTMENTS D  \
+WHERE D.MANAGER_ID IS NULL;\
+\
+24 Adlar\uc0\u305  ayn\u305  soy adlar\u305  farkl\u305  olan personelin ad\u305 n\u305  ve soy ad\u305 n\u305  ayn\u305  s\'fctunda listeleyen SQL kodunu yaz\u305 n\u305 z..\
+SELECT E.FIRST_NAME|| ' ' ||E.LAST_NAME|| ' ' ||B.FIRST_NAME|| ' ' ||B.LAST_NAME as AYNI_\uc0\u304 S\u304 M_FARKLI_SOYAD\
+FROM EMPLOYEES E, EMPLOYEES B  \
+WHERE E.FIRST_NAME = B.FIRST_NAME  \
+AND E.LAST_NAME <> B.LAST_NAME;\
+\
+25-): Her Meslek gurubunda ka\'e7 ki\uc0\u351 i \'e7al\u305 \u351 t\u305 \u287 \u305 n\u305  listeleyen SQL kodunu yaz\u305 n\u305 z...\
+SELECT E.JOB_ID, COUNT(E.EMPLOYEE_ID) /* --> COUNT() yandakinin ayn\uc0\u305 s\u305  */  \
+FROM EMPLOYEES E  \
+GROUP BY E.JOB_ID;\
+\
+26-): Her mesle\uc0\u287 in ad\u305 n\u305  ve ka\'e7 ki\u351 i \'e7al\u305 \u351 t\u305 \u287 \u305 n\u305  listeleyen SQL kodunu yaz\u305 n\u305 z...\
+SELECT J.JOB_TITLE, COUNT(E.EMPLOYEE_ID) /* --> COUNT() yandakinin ayn\uc0\u305 s\u305  */  \
+FROM EMPLOYEES E  \
+JOIN JOBS J ON E.JOB_ID = J.JOB_ID  \
+GROUP BY J.JOB_TITLE;\
+\
+27-): Her departman\uc0\u305 n ad\u305 n\u305  ve departmanda ka\'e7 personel \'e7al\u305 \u351 t\u305 \u287 \u305 n\u305  sorgulayan SQL kodunu yaz\u305 n\u305 z\
+SELECT D.DEPARTMENT_NAME, COUNT(E.EMPLOYEE_ID)  \
+FROM DEPARTMENTS D, EMPLOYEES E  \
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID  \
+GROUP BY D.DEPARTMENT_NAME;\
+\
+28-): Her \uc0\u351 ehrin ad\u305 n\u305  ve o \u351 ehirde ka\'e7 departman olduunu listeleyen SQL kodunu yaz\u305 n\u305 z \
+SELECT L.CITY, COUNT(D.DEPARTMENT_ID) AS DEPARTMAN_SAYISI  \
+FROM DEPARTMENTS D, LOCATIONS L  \
+WHERE D.LOCATION_ID = L.LOCATION_ID  \
+GROUP BY L.CITY;\
+\
+29-): Her \'fclkenin ad\uc0\u305 n\u305  ve \'fclkedeki  \u351 ehir say\u305 s\u305 n\u305  listeleyen SQL kodunu yaz\u305 n\u305 z...\
+SELECT C.COUNTRY_NAME, COUNT(L.CITY) AS SEHIR_SAYISI  \
+FROM COUNTRIES C, LOCATIONS L  \
+WHERE C.COUNTRY_ID = L.COUNTRY_ID  \
+GROUP BY C.COUNTRY_NAME;\
+\
+30: En d\'fc\uc0\u351 \'fck maa\u351 \u305  alan i\u351 \'e7inin ad\u305 n\u305  soyad\u305 n\u305 ,maa\u351 \u305 n\u305  ve departman ad\u305 n\u305  listeleyen sql kodunu yaz\u305 n\u305 z...\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME\
+FROM EMPLOYEES E JOIN DEPARTMENTS D \
+ON E.DEPARTMENT_ID = D.DEPARTMENT_ID\
+WHERE E.SALARY = (SELECT MIN(SALARY) FROM EMPLOYEES);\
+\
+/30.Sorunun JO\uc0\u304 N ifadesi ile \'e7\'f6z\'fcm\'fc/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME\
+FROM EMPLOYEES E, DEPARTMENTS D \
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID\
+AND E.SALARY = (SELECT MIN(SALARY) FROM EMPLOYEES);\
+\
+/31-)her bir departmanda end\'fc\uc0\u351 \'fck maa\u351 \u305  alan \'e7al\u305 an\u305 n ad soyad maa\u351  departman ad\u305  liseleme/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME  \
+FROM EMPLOYEES E, DEPARTMENTS D  \
+WHERE (D.DEPARTMENT_ID, E.SALARY) = ANY (  \
+    SELECT E.DEPARTMENT_ID, MIN(SALARY)  \
+    FROM EMPLOYEES E  \
+    GROUP BY E.DEPARTMENT_ID  \
+);\
+\
+/32-)her departmanda maa\uc0\u351 \u305  3000 ile 5000 aras\u305 nda olan ka\'e7 \'e7al\u305 \u351 an oldu\u287 unu bulan sql kodu/\
+SELECT D.DEPARTMENT_NAME, COUNT(E.EMPLOYEE_ID)  \
+FROM DEPARTMENTS D, EMPLOYEES E  \
+WHERE D.DEPARTMENT_ID = E.DEPARTMENT_ID  \
+AND E.SALARY BETWEEN 3000 AND 5000  \
+GROUP BY D.DEPARTMENT_NAME;\
+\
+/33-)en az 10 \'e7al\uc0\u305 \u351 ana sahip meslek gruplar\u305 n\u305  listeleen sql kodu/\
+SELECT J.JOB_TITLE, COUNT(E.EMPLOYEE_ID)  \
+FROM EMPLOYEES E, JOBS J  \
+WHERE E.JOB_ID = J.JOB_ID  \
+GROUP BY J.JOB_TITLE  \
+HAVING COUNT(J.JOB_ID) >= 10;\
+\
+/34-)her departman\uc0\u305 n ortalama maa\u351 \u305 n\u305  listeleyen sql kodu/\
+SELECT D.DEPARTMENT_NAME, ROUND(AVG(E.SALARY), 3) AS ORT_MAAS  \
+FROM EMPLOYEES E, DEPARTMENTS D  \
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID  \
+GROUP BY D.DEPARTMENT_NAME;\
+\
+/35-) 30 nolu departmanda ortalama maa\uc0\u351 tan az para alan \'e7al\u305 \u351 anlar\u305  listele/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY  \
+FROM EMPLOYEES E, DEPARTMENTS D  \
+WHERE D.DEPARTMENT_ID = E.DEPARTMENT_ID  \
+AND E.DEPARTMENT_ID = 30  \
+AND E.SALARY <= (SELECT AVG(E.SALARY) FROM EMPLOYEES E);\
+\
+/36-)\uc0\u351 irkette ilk i\u351 e ba\u351 layan ki\u351 inin ad\u305 n\u305  soyad\u305 n\u305  hire date yazan sql kodu/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.HIRE_DATE  \
+FROM EMPLOYEES E  \
+WHERE E.HIRE_DATE = (SELECT MIN(E.HIRE_DATE) FROM EMPLOYEES E);\
+\
+/37-)ortalama maa\uc0\u351 tan daha y\'fcksek maa\u351  alan personellerin ad soyad maa\u351  listeleme/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY  \
+FROM EMPLOYEES E  \
+GROUP BY E.FIRST_NAME, E.LAST_NAME, E.SALARY  \
+HAVING E.SALARY > (SELECT AVG(SALARY) FROM EMPLOYEES);\
+\
+/38-)en y\'fcksek maa\uc0\u351 a sahip personelin ad soyad maa\u351  ve \'fcnvan\u305 n\u305  sorgulama/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, J.JOB_TITLE  \
+FROM EMPLOYEES E, JOBS J  \
+WHERE E.JOB_ID = J.JOB_ID  \
+AND E.SALARY = (SELECT MAX(SALARY) FROM EMPLOYEES);\
+\
+/39-)en \'e7ok \'e7al\uc0\u305 \u351 an\u305  olan \'fcnvan\u305  bulan sorgu/\
+SELECT J.JOB_TITLE, COUNT(E.EMPLOYEE_ID)  \
+FROM JOBS J, EMPLOYEES E  \
+WHERE E.JOB_ID = J.JOB_ID  \
+GROUP BY E.JOB_ID, J.JOB_TITLE  \
+HAVING COUNT(E.EMPLOYEE_ID) = (  \
+    SELECT MAX(COUNT(*))  \
+    FROM EMPLOYEES E  \
+    GROUP BY E.JOB_ID\
+);\
+\
+/40-)job title clerk olan personellerin i\'e7inde en yeni i\uc0\u351 e giren personelin ad soyad i\u351 e giri\u351  tarihi sorgu/\
+SELECT E.FIRST_NAME, E.LAST_NAME, E.HIRE_DATE, J.JOB_TITLE  \
+FROM EMPLOYEES E, JOBS J  \
+WHERE E.JOB_ID = J.JOB_ID  \
+AND E.HIRE_DATE = (  \
+    SELECT MAX(E.HIRE_DATE)  \
+    FROM EMPLOYEES E  \
+    WHERE E.JOB_ID = ANY (  \
+        SELECT J.JOB_ID  \
+        FROM JOBS J  \
+        WHERE J.JOB_TITLE LIKE '%Clerk%\'92  \
+    )\
+);\
+\
+/41-)personel isimlerinin isilerinin en \'e7ok hangi harfle ba\uc0\u351 lad\u305 \u287 \u305 n\u305  bulan sorgu/\
+SELECT SUBSTR(E.FIRST_NAME, 1, 1)  as EN\'c7OK_GE\'c7EN_HARF\
+FROM EMPLOYEES E  \
+GROUP BY SUBSTR(E.FIRST_NAME, 1, 1)  \
+HAVING COUNT(*) = (  \
+    SELECT MAX(COUNT(*))  \
+    FROM EMPLOYEES E  \
+    GROUP BY SUBSTR(E.FIRST_NAME, 1, 1)\
+);\
+                    \
+/42-)en az \uc0\u351 ehre sahip olan \'fclkeyi sorgulayan kod/\
+SELECT C.COUNTRY_NAME, COUNT(C.COUNTRY_NAME)  \
+FROM COUNTRIES C, LOCATIONS L  \
+WHERE C.COUNTRY_ID = L.COUNTRY_ID  \
+GROUP BY C.COUNTRY_NAME  \
+HAVING COUNT(C.COUNTRY_NAME) = (  \
+    SELECT MIN(COUNT(*))  \
+    FROM LOCATIONS L  \
+    GROUP BY L.CITY\
+);\
+\
+/43-)Employees tablosundaki tum \'e7al\uc0\u305 \u351 anlara ait en y\'fcksek en d\'fcs\'fck maa\u351 lar\u305  toplam\u305  ve aritmetik ortalamas\u305 n\u305  veren sql kodu/\
+SELECT MAX(SALARY) AS "EN \'c7OK",  \
+       MIN(SALARY) AS "EN AZ",  \
+       SUM(SALARY) AS "TOPLAM",  \
+       (MAX(SALARY) + MIN(SALARY)) / 2 AS "MAX-MIN-AVG",  \
+       ROUND(AVG(SALARY), 1) AS "ORTALAMA"  \
+FROM EMPLOYEES;\
+    \
+/44-)Job_id lerine g\'f6re en d\'fc\uc0\u351 \'fck maa\u351 \u305  bulup bu maa\u351 lar\u305 n ortalamas\u305 n\u305  alan sql kodu/\
+SELECT ROUND(AVG(MIN(SALARY)), 2) AS "MIN_MAASLARIN_ORTALAMASI"  \
+FROM EMPLOYEES  \
+GROUP BY JOB_ID;\
+\
+/45-)Departmanlara g\'f6re en y\'fcksek maa\uc0\u351 lar\u305 n ve ortalamalar\u305 n listelendi\u287 i sql kodu/\
+SELECT E.DEPARTMENT_ID, D.DEPARTMENT_NAME,  \
+       ROUND(MAX(SALARY), 2) AS EN_YUKSEK_MAAS,  \
+       ROUND(AVG(SALARY), 2) AS ORTALAMA_MAAS  \
+FROM EMPLOYEES E, DEPARTMENTS D  \
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID  \
+GROUP BY E.DEPARTMENT_ID, D.DEPARTMENT_NAME;\
+\
+/*46-)Yonetici olan tum departmanlar\uc0\u305 n kend\u305  i\'e7inde grupland\u305 r\u305 larak bu b\'f6l\'fcmlerden maksimum\
+maa\uc0\u351  ile minimum maa\u351  fark\u305 n\u305 n 5000den b\'fcy\'fck olanlar\u305 n manager id si ile o b\'f6l\'fcmdek\u305  \
+minimum maa\uc0\u351 \u305 , maa\u351 a g\'f6re azalan s\u305 rada s\u305 ralayan sql kodu*/\
+SELECT MANAGER_ID, MIN(SALARY)  \
+FROM EMPLOYEES E  \
+WHERE MANAGER_ID IS NOT NULL  \
+GROUP BY MANAGER_ID  \
+HAVING MAX(SALARY) - MIN(SALARY) > 5000  \
+ORDER BY MIN(SALARY) DESC;\
+  \
+/*47-)job \uc0\u305 dler\u305  mk_man mk rep ve add ast i\u351 lerinde \'e7al\u305 \u351 mayan \'e7al\u305 \u351 anlar\u305  job \u305 dler\u305 ne gore\
+grupland\uc0\u305 rarak bu i\u351 lere ait ortalama maa\u351 lar\u305 , ortalama maa\u351 lar\u305 n 10.000 den yuksek\
+olanlar\uc0\u305 n\u305  g\'f6steren ve sonu\'e7lar\u305  maa\u351 a gore artan s\u305 ra ile s\u305 ralayan sql kodu*/\
+SELECT JOB_ID, AVG(SALARY) AS AVERAGE_SALARY\
+FROM EMPLOYEES E\
+WHERE JOB_ID NOT IN ('MK_MAN', 'MK_REP', 'ADD_AST')\
+GROUP BY JOB_ID\
+HAVING AVG(SALARY) > 10000\
+ORDER BY AVG(SALARY) DESC;\
+\
+/48-)Employees tablosundaki tekrarlamayan b\'f6l\'fcmlerin say\uc0\u305 s\u305 n\u305  bulan sql kodu/\
+SELECT COUNT(DISTINCT DEPARTMENT_ID) AS TEKRARLANMAYAN  \
+FROM EMPLOYEES;\
+\
+/49-)\expnd0\expndtw0\kerning0
+En az bir \'e7al\uc0\u305 \u351 an\u305  olup, bu \'e7al\u305 \u351 anlar\u305 n maa\u351  ortalamas\u305  genel maa\u351  ortalamas\u305 n\u305 n \'fczerinde olan departmanlar\u305 n adlar\u305 n\u305  listeleyin
+\f1\b \
+
+\f0\b0 SELECT D.DEPARTMENT_NAME\
+FROM DEPARTMENTS D\
+WHERE D.DEPARTMENT_ID IN (\
+  SELECT E.DEPARTMENT_ID\
+  FROM EMPLOYEES E\
+  GROUP BY E.DEPARTMENT_ID\
+  HAVING AVG(E.SALARY) > (SELECT AVG(SALARY) FROM EMPLOYEES)\
+);\
+SELECT D.DEPARTMENT_NAME\
+FROM DEPARTMENTS D\
+JOIN EMPLOYEES E ON D.DEPARTMENT_ID = E.DEPARTMENT_ID\
+GROUP BY D.DEPARTMENT_NAME\
+HAVING AVG(E.SALARY) > (SELECT AVG(SALARY) FROM EMPLOYEES);
+\f1\b \
+\
+
+\f0\b0 /50-)Her bir i\uc0\u351  unvan\u305  (JOB_TITLE) i\'e7in, o i\u351  unvan\u305 ndaki \'e7al\u305 \u351 an say\u305 s\u305 , toplam maa\u351  ve ortalama maa\u351 \u305  listeleyin. Ancak sadece 3'ten fazla \'e7al\u305 \u351 an\u305  olan i\u351  unvanlar\u305 n\u305  dahil edin.\
+SELECT J.JOB_TITLE, \
+       COUNT(*) AS CALISAN_SAYISI, \
+       SUM(E.SALARY) AS TOPLAM_MAAS, \
+       ROUND(AVG(E.SALARY), 2) AS ORTALAMA_MAAS\
+FROM EMPLOYEES E, JOBS J\
+WHERE E.JOB_ID = J.JOB_ID\
+GROUP BY J.JOB_TITLE\
+HAVING COUNT(*) > 3;\
+\
+SELECT J.JOB_TITLE, \
+       COUNT(E.EMPLOYEE_ID) AS CALISAN_SAYISI, \
+       SUM(E.SALARY) AS TOPLAM_MAAS, \
+       ROUND(AVG(E.SALARY), 2) AS ORTALAMA_MAAS\
+FROM EMPLOYEES E\
+JOIN JOBS J ON E.JOB_ID = J.JOB_ID\
+GROUP BY J.JOB_TITLE\
+HAVING COUNT(E.EMPLOYEE_ID) > 3;\
+
+\f1\b \
+}
