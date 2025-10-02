@@ -1,38 +1,38 @@
-# **Oracle HR Veritabanı Üzerinde SQL Sorgu Uygulamaları**
+# **🔷 Oracle HR Database SQL Query Practices**
 
-Bu proje, **Oracle HR (Human Resources)** veritabanı yapısı kullanılarak hazırlanmış **50 SQL sorusu** ve bu soruların çözümlerini içeren bir çalışmadır. Her bir soru, temel ve ileri düzey SQL konularını kapsayan örnekler üzerinden anlatılmıştır.
+This project contains **50 SQL questions** and their solutions, prepared using the Oracle HR (Human Resources) database schema. Each question demonstrates both basic and advanced SQL concepts through practical examples.
 
-## 🚀 **Proje Özeti**
+## 🚀 **Project Overview**
 
-**SQL**, veri tabanı yönetimi ve sorgulama konusunda en temel dildir. Bu projede, Oracle tarafından sağlanan **HR veritabanı** kullanılarak, çeşitli veri sorgulama, düzenleme, gruplama, alt sorgular, birleştirme (JOIN), alt sorgular gibi **SQL** konularını kapsayan 50 adet uygulamalı soru hazırlanmıştır.
+**SQL** is the fundamental language for database management and querying. In this project, using the HR database provided by Oracle, **50 hands-on questions** were prepared covering topics such as **data retrieval, filtering, grouping, subqueries, joins, and nested queries**.
 
-Her soru, SQL sorgusu ile birlikte açıklamalı olarak sunulmuş, ayrıca **LiveSQL** ortamında çalıştırılmış ve elde edilen çıktının ekran görüntüsü ile desteklenmiştir.
-
----
-
-## 📌 **İçerik ve Özellikler**
-
-Bu depo, aşağıdaki konularda hazırlanmış **50 SQL uygulama sorusunu** kapsamaktadır:
-
-✅ **SELECT, WHERE, ORDER BY, GROUP BY, HAVING** komutları  
-✅ **JOIN komutu ile ek çözümler**  
-✅ **Alt sorgular (Subqueries)** ve **iç içe sorgular (Nested Queries)**   
-✅ **NULL değerlerle çalışma**  
-✅ **Veri toplama fonksiyonları: COUNT, SUM, AVG, MIN, MAX**  
-✅ **Tarih ve Karakter Fonksiyonları**
+Each question is presented with its SQL query, an explanation, and supported with screenshots of the execution results in the **Oracle LiveSQL** environment.
 
 ---
 
-## 🛠 **Kurulum ve Kullanım**
+## 📌 **Content and Features**
 
-### **1️⃣ Oracle LiveSQL Ortamı**
-Projede yer alan tüm sorgular, Oracle’ın web tabanlı platformu olan **LiveSQL** üzerinden test edilmiştir:  
+This repository covers **50 SQL practice questions** on the following topics:
+
+✅ **SELECT, WHERE, ORDER BY, GROUP BY, HAVING** statements  
+✅ **Solutions using JOINS**  
+✅ **Subqueries** and **Nested Queries**   
+✅ **Working with NULL values**  
+✅ **Aggregate functions: COUNT, SUM, AVG, MIN, MAX**  
+✅ **Date and String Functions**
+
+---
+
+## 🛠 **Setup and Usage**
+
+### **1️⃣ Oracle LiveSQL Environment**
+All queries in this project were tested on **Oracle’s web-based LiveSQL** platform:  
 🔗 [Oracle LiveSQL](https://livesql.oracle.com/)
 
-### **2️⃣ HR Veritabanı Scripti**
-Projede kullanılan veritabanı, Oracle’ın örnek veri kümesi olan **HR (Human Resources)** yapısıdır. Script dosyasına buradan ulaşabilirsiniz:  
-🔗 [HR Veritabanı Scripti](https://livesql.oracle.com/ords/livesql/file/content_GV8MU6SITA2V3VYI179FAJUCY.html)
+### **2️⃣ HR Database Script**
+The project uses Oracle’s sample dataset **HR (Human Resources)**. You can access the script here:  
+🔗 [HR Database Script](https://livesql.oracle.com/ords/livesql/file/content_GV8MU6SITA2V3VYI179FAJUCY.html)
 
-### **3️⃣ Projeyi Klonlayın**
+### **3️⃣ Clone the Project**
 ```bash
 git clone https://github.com/bahadirverir/Oracle-SQL-50-Soruda.git
