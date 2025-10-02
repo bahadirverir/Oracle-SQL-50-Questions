@@ -1,0 +1,6 @@
+SELECT MAX(SALARY) AS "MAX",  
+       MIN(SALARY) AS "MIN",  
+       SUM(SALARY) AS "SUM",  
+       (MAX(SALARY) + MIN(SALARY)) / 2 AS "MAX-MIN-AVG",  
+       ROUND(AVG(SALARY), 1) AS "AVG"  
+FROM EMPLOYEES;

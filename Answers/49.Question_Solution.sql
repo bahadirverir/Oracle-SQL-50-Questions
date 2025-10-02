@@ -7,7 +7,7 @@ WHERE D.DEPARTMENT_ID IN (
   HAVING AVG(E.SALARY) > (SELECT AVG(SALARY) FROM EMPLOYEES)
 );
 
-//Sorunun Join ifadesi ile çözümü;
+// Solution to the problem with join statement;
 
 SELECT D.DEPARTMENT_NAME
 FROM DEPARTMENTS D

@@ -6,7 +6,7 @@ AND E.JOB_ID = J.JOB_ID
 AND E.COMMISSION_PCT IS NULL 
 AND J.JOB_TITLE='Programmer';
 
-// Sorunun Join İfadesi ile çözümü;
+// Solution to the problem with join statement;
 
 SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.COMMISSION_PCT, L.CITY, J.JOB_TITLE
 FROM EMPLOYEES E

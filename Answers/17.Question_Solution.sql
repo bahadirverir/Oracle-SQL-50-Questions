@@ -2,7 +2,7 @@ SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, J.JOB_TITLE FROM EMPLOYEES E, JOBS J
 WHERE J.JOB_TITLE = 'Programmer'
 AND E.JOB_ID = J.JOB_ID;
 
-// Sorunun Join ifadesi ile çözümü;
+// Solution to the problem with join statement;
 
 SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, J.JOB_TITLE 
 FROM EMPLOYEES E JOIN JOBS J

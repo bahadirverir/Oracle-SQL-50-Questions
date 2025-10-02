@@ -4,7 +4,7 @@ WHERE J.JOB_TITLE = 'Finance Manager'
 AND E.JOB_ID = J.JOB_ID 
 AND E.DEPARTMENT_ID = D.DEPARTMENT_ID;
 
-// Sorunun Join İfadesi ile çözümü;
+// Solution to the problem with join statement;
 
 SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME, J.JOB_TITLE
 FROM EMPLOYEES E JOIN DEPARTMENTS D 

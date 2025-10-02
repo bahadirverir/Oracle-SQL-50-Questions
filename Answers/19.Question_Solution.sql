@@ -4,7 +4,7 @@ WHERE to_char(sysdate,'yyyy')-to_char(E.HIRE_DATE,'yyyy')>15
 AND E.DEPARTMENT_ID = D.DEPARTMENT_ID
 AND D.DEPARTMENT_NAME = 'Marketing';
 
-// Sorunun Join ifadesi ile çözümü;
+// Solution to the problem with join statement;
 
 SELECT E.FIRST_NAME, E.LAST_NAME, E.SALARY, E.HIRE_DATE, D.DEPARTMENT_NAME
 FROM EMPLOYEES E JOIN DEPARTMENTS D
