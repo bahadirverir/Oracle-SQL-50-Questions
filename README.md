@@ -1,4 +1,4 @@
-# **Oracle HR Veritabanı Üzerinde SQL Sorgu Uygulamaları**
+# **🔷 Oracle HR Veritabanı Üzerinde SQL Sorgu Uygulamaları**
 
 Bu proje, **Oracle HR (Human Resources)** veritabanı yapısı kullanılarak hazırlanmış **50 SQL sorusu** ve bu soruların çözümlerini içeren bir çalışmadır. Her bir soru, temel ve ileri düzey SQL konularını kapsayan örnekler üzerinden anlatılmıştır.
 
